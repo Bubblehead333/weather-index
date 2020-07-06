@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Comfort Index</title>
+
+	<link rel="stylesheet" href="css/blocks.css" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/2412043277.js" crossorigin="anonymous"></script>
+
+	<!--jquery used to minimize the code -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="js/phrases.js"></script>
+	<script src="js/hour-block.js"></script>
+	<script src="js/day-block.js"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Baloo+2&amp;family=Gudea&amp;display=swap" rel="stylesheet">
+
+<script>
+
+function getWeatherData() {
+
+    //Initialize the widget using the container parameters
+
+    var location = "Plymouth, UK";
+    var unitGroup = "uk";
+    var key = "EG9M1DKIS4M8MMPZS81PQ37WS";
+
+    //endpoint
+    var uri = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?";
+    //parameters
+    uri += "unitGroup=" + unitGroup + "&locationMode=single&aggregateHours=1&includeAstronomy=true&contentType=json&iconSet=icons1&location=" + location + "&key=" + key;
+    $.get(uri, function(rawResult) {
+        var data = rawResult;
+        console.log(rawResult.location["values"][0]);
+        var todayData = rawResult.location["values"][0];
+
+		generateDayBlock(todayData);
+		getDayPhrase(todayData);
+
+		for (var i = 0; i < 6; i++) {
+			generateHoursHTML(i);
+			generateHourBlock(rawResult.location["values"][i], i);
+		}
+    });
+}
+
+getWeatherData();
+
+</script>
+</head>
+<body>
+
+<div class="day-info">
+    <div class="row">
+        <div class="col-sm-3">
+            <h2><div id="date"</div></h2>
+        </div>
+        <div class="col-sm-1">
+            <div id="sunrise"><i class="far fa-sun" title="Sunrise"></i> </div>
+        </div>
+        <div class="col-sm-1">
+            <div id="sunset"><i class="far fa-moon" title="Sunset"></i> </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <h2 id="phrase"></h2>
+        </div>
+		<div class="col-sm-12 col-md-6">
+            <div id="recommend">
+				<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
+				<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
+				<i class="fas fa-wind" title="Blowy m8"></i>
+				<i class="fas fa-sun" title="Probably should wear sunscreen."></i>
+				<i class="fas fa-pills" title="Prepare your allergy tablets!"></i>
+				<i class="fas fa-mitten" title="It's nippy!"></i>
+				<i class="fas fa-icicles" title="There be ice on the road!"></i>
+				<i class="fas fa-snowflake" title="There be ice on the road!"></i>
+				<i class="fas fa-ice-cream" title="Perfect ice cream weather"></i>
+				<i class="fas fa-leaf" title="Pollen count is high!"></i>
+				<i class="fas fa-smog" title="Air pollution is high!"></i>
+				<i class="fas fa-lungs" title="Air pollution is high!"></i>
+			</div>
+        </div>
+    </div>
+</div>
+<div class="hour-info">
+	<div class="row" id="hour-bar"></div>
+</div>
+<div class="sources">
+	<div class="row">
+		<div class="col-sm-12 sources-text">
+			<p>
+				A silly application created as a learning exercise to cement
+				knowledge of APIs and JavaScript.
+			</p>
+			<p>
+				Weather information supplied by: https://www.visualcrossing.com/
+			</p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

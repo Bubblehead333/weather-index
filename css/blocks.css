@@ -1,0 +1,26 @@
+.hour-block{
+    background-color: #E9E9E9;
+    padding: 5px;
+    margin-top: 5px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
+}
+
+.time{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.temp{
+    font-size: 26px;
+    font-weight: bold;
+}
+
+body{
+    font-family: 'Baloo 2', cursive !important;
+}
+
+.sources-text{
+    font-size: 12px;
+}
