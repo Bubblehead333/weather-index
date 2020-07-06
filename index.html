@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<title>Comfort Index</title>
+	<title>Weather Index</title>
 
 	<link rel="stylesheet" href="css/blocks.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/2412043277.js" crossorigin="anonymous"></script>
 
-	<!--jquery used to minimize the code -->
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="js/phrases.js"></script>
 	<script src="js/hour-block.js"></script>
@@ -20,15 +19,11 @@
 
 function getWeatherData() {
 
-    //Initialize the widget using the container parameters
-
     var location = "Plymouth, UK";
     var unitGroup = "uk";
-    var key = "EG9M1DKIS4M8MMPZS81PQ37WS";
+    var key = "";
 
-    //endpoint
     var uri = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?";
-    //parameters
     uri += "unitGroup=" + unitGroup + "&locationMode=single&aggregateHours=1&includeAstronomy=true&contentType=json&iconSet=icons1&location=" + location + "&key=" + key;
     $.get(uri, function(rawResult) {
         var data = rawResult;
@@ -69,6 +64,7 @@ getWeatherData();
         </div>
 		<div class="col-sm-12 col-md-6">
             <div id="recommend">
+				<!--These will be used later for warnings/recommendations-->
 				<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
 				<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
 				<i class="fas fa-wind" title="Blowy m8"></i>
