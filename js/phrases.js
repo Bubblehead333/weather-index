@@ -1,47 +1,51 @@
 function getDayPhrase(todayData){
+
+	var phrase1, phrase2, phrase3 = "";
+
+
 	if(todayData.temp < -5){
 		phrase1 = "Baltic"
-	} else if (todayData.temp > -5 && todayData.temp < 5) {
+	} else if (todayData.temp > -5 && todayData.temp <= 5) {
 		phrase1 = "Freezing ma tits off"
-	} else if (todayData.temp > 5 && todayData.temp < 8) {
+	} else if (todayData.temp > 5 && todayData.temp <= 8) {
 		phrase1 = "Nippy"
-	} else if (todayData.temp > 8 && todayData.temp < 12) {
+	} else if (todayData.temp > 8 && todayData.temp <= 12) {
 		phrase1 = "Mild"
-	} else if (todayData.temp > 12 && todayData.temp < 16) {
-		phrase1 = "Pleasant"
-	} else if (todayData.temp > 16 && todayData.temp < 20) {
+	} else if (todayData.temp > 12 && todayData.temp <= 16) {
+		phrase1 = "Warm"
+	} else if (todayData.temp > 16 && todayData.temp <= 20) {
 		phrase1 = "Taps aff"
-	} else if (todayData.temp > 20 && todayData.temp < 24) {
+	} else if (todayData.temp > 20 && todayData.temp <= 24) {
 		phrase1 = "Hot"
-	} else if (todayData.temp > 24 && todayData.temp < 28) {
+	} else if (todayData.temp > 24 && todayData.temp <= 28) {
 		phrase1 = "Pure Roastin'"
 	} else if (todayData.temp > 28) {
-		phrase1 = "Fuckin' Hot"
+		phrase1 = "F***in' Hot"
 	}
 
 	//Phrase precipitation
 	if (todayData.precip == 0) {
-		phrase2 = "Clear"
-	} else if(todayData.precip > 0 && todayData.humidity < 2.5) {
+		phrase2 = todayData.conditions
+	} else if(todayData.precip > 0 && todayData.precip <= 2.5) {
 		phrase2 = "Spitting"
-	} else if(todayData.precip > 2.5 && todayData.humidity < 10) {
+	} else if(todayData.precip > 2.5 && todayData.precip <= 10) {
 		phrase2 = "a Braw Day for Ducks"
-	} else if (todayData.precip > 10 && todayData.humidity < 50) {
+	} else if (todayData.precip > 10 && todayData.precip <= 50) {
 		phrase2 = "Phishin' Doon"
 	} else if (todayData.precip > 50) {
-		phrase2 = "Fuckin' Wet"
-        phrase2 = "Drookit"
+		phrase2 = "F***in' Wet"
+        // phrase2 = "Drookit"
 
 	}
 
 	//Phrase humidity
 	if (todayData.humidity < 50) {
 		phrase3 = "Thin"
-	} else if(todayData.humidity > 50 && todayData.humidity < 70) {
+	} else if(todayData.humidity > 50 && todayData.humidity <= 70) {
 		phrase3 = "Moist"
-	} else if (todayData.humidity > 70 && todayData.humidity < 85) {
+	} else if (todayData.humidity > 70 && todayData.humidity <= 85) {
 		phrase3 = "Thick"
-	} else if (todayData.humidity > 85 && todayData.humidity < 95) {
+	} else if (todayData.humidity > 85 && todayData.humidity <= 95) {
 		phrase3 = "Sticky"
 	} else if (todayData.humidity > 95) {
 		phrase3 = "Soggy"

@@ -7,15 +7,22 @@ function generateHoursHTML(hourData, index)
 	if(temperatureSize < 0){temperatureSize = 0;}
 	if(temperatureSize > 100){temperatureSize = 100;}
 
-	var tempatureColour = "hsl(" + temperatureSize * 2 + ", 81%, 83%)";
+	var rainColour = 'black';
+	if(hourData.pop > 0){
+		rainColour = '#00aff5';
+		console.log("iover 0%");
+	}
 
-	var hourBlock = "<div style='background-image: linear-gradient(" + tempatureColour + ", " + tempatureColour + " 100%); background-size: 100%" + temperatureSize + "%; background-repeat: no-repeat; background-position: center bottom;' class='hour-block col-sm-2 col-md-2 col-lg-1'>" +
+	var tempatureColour1 = "hsl(" + temperatureSize * 2 + ", 81%, 83%)";
+	var tempatureColour2 = "hsl(" + (temperatureSize + 10) * 2 + ", 81%, 83%)";
+
+	var hourBlock = "<div style='background-image: linear-gradient(" + tempatureColour1 + ", " + tempatureColour2 + " 100%); background-size: 100%" + temperatureSize + "%; background-repeat: no-repeat; background-position: center bottom;' class='hour-block col-sm-2 col-md-2 col-lg-1'>" +
 	"<div class='colour' id='colour-" + index + "'>" +
 		"<div class='time' id='time-" + index + "'></div>" +
 		"<div class='conditions' id='conditions-" + index + "'></div>" +
 		"<div class='temp' id='temp-" + index + "'></div>" +
 		"<div class='humidity hour-icon' title='Humidity' id='humidity-" + index + "'><i class='fas fa-water'></i> </div>" +
-		"<div class='rain hour-icon' title='Precipitation Chance' id='rain-" + index + "'><i class='fas fa-tint'></i> </div>" +
+		"<div class='rain hour-icon' style='color: " + rainColour + "' title='Precipitation Chance' id='rain-" + index + "'><i class='fas fa-tint'></i> </div>" +
 		"</div>" +
 
 	"</div>";
@@ -43,8 +50,13 @@ function generateHourBlock(hourData, index)
 	var rainBlock = document.getElementById("rain-" + index);
 	rainBlock.innerHTML += hourData.pop + '%';
 
-	//Rain
+	//Conditions
 	var conditionsBlock = document.getElementById("conditions-" + index);
-	conditionsBlock.innerHTML += hourData.conditions;
+
+	var conditionString = String(hourData.conditions);
+	if(conditionString.indexOf(',') != -1){
+		conditionString = conditionString.substring(0, conditionString.indexOf(','));
+	}
+	conditionsBlock.innerHTML += conditionString;
 
 }

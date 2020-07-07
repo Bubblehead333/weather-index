@@ -29,7 +29,7 @@ function getWeatherData() {
     uri += "unitGroup=" + unitGroup + "&locationMode=single&aggregateHours=1&includeAstronomy=true&contentType=json&iconSet=icons1&location=" + location + "&key=" + key;
     $.get(uri, function(rawResult) {
         var data = rawResult;
-        console.log(rawResult.location["values"][1]);
+        console.log(rawResult.location["values"]);
         var todayData = rawResult.location["values"][0];
 
 		generateDayBlock(todayData);
@@ -51,85 +51,98 @@ getWeatherData();
 <body>
 
 <div class="day-info">
-    <div class="row">
-        <div class="col-sm-3">
-            <h2><div id="date"</div></h2>
-        </div>
-		<div class="col-sm-3">
-            <h2><div id="location"</div></h2>
-        </div>
-        <div class="col-sm-1">
-            <div id="sunrise"><i class="far fa-sun" title="Sunrise"></i> </div>
-        </div>
-        <div class="col-sm-1">
-            <div id="sunset"><i class="far fa-moon" title="Sunset"></i> </div>
-        </div>
-    </div>
-	<div class="row">
-		<div class="col-sm-3">
-			<div class="current-time" id="current-time"></div>
-		</div>
-		<div class="col-sm-9">
-			<div id="recommend">
-				<!--These will be used later for warnings/recommendations-->
-				<div class="icon" id="umbrella">
-					<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
+    <!-- <div class="row"> -->
+		<!-- <div class="col-md-12"> -->
+		<div id="phrase-header">
+			<div class="container">
+				<div class="row padding-top-50">
+					<div class="col-sm-12">
+						<h2><div id="date"</div></h2>
+					</div>
 				</div>
-				<div class="icon" id="sunglasses">
-					<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
+				<div class="row">
+					<div class="col-sm-12">
+						<h2><div id="location"</div></h2>
+					</div>
 				</div>
-				<div class="icon" id="wind">
-					<i class="fas fa-wind" title="Blowy m8"></i>
-				</div>
-
-				<div class="icon" id="sunscreen">
-					<i class="fas fa-sun" title="Probably should wear sunscreen."></i>
-				</div>
-
-				<div class="icon" id="pills">
-					<i class="fas fa-pills" title="Prepare your allergy tablets!"></i>
-				</div>
-
-				<div class="icon" id="gloves">
-					<i class="fas fa-mitten" title="It's nippy!"></i>
-				</div>
-
-				<div class="icon" id="ice">
-					<i class="fas fa-icicles" title="There be ice on the road!"></i>
-				</div>
-
-				<div class="icon" id="snow">
-					<i class="fas fa-snowflake" title="There be ice on the road!"></i>
-				</div>
-				<div class="icon" id="ice-cream">
-					<i class="fas fa-ice-cream" title="Perfect ice cream weather"></i>
-				</div>
-
-				<div class="icon" id="pollen">
-					<i class="fas fa-leaf" title="Pollen count is high!"></i>
-				</div>
-
-				<div class="icon" id="fog">
-					<i class="fas fa-smog" title="Foggy!"></i>
-				</div>
-
-				<div class="icon" id="air-pollution">
-					<i class="fas fa-lungs" title="Air pollution is high!"></i>
+				<div class="row">
+					<div class="col-sm-12">
+						<h2 id="phrase"></h2>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h2 id="phrase"></h2>
-        </div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
+		<div class="row dark-grey">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div style="width: 49%; display: inline-block">
+							<div class="current-time" id="current-time"></div>
+						</div>
+						<div style="width: 49%; display: inline-block">
+							<div class="sun">
+					            <div id="sunrise"><i class="far fa-sun" title="Sunrise"></i> Sunrise </div>
+					        </div>
+					        <div class="sun">
+					            <div id="sunset"><i class="far fa-moon" title="Sunset"></i> Sunset </div>
+					        </div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div id="recommend">
+							<!--These will be used later for warnings/recommendations-->
+							<div class="icon" id="umbrella">
+								<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
+							</div>
+							<div class="icon" id="sunglasses">
+								<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
+							</div>
+							<div class="icon" id="wind">
+								<i class="fas fa-wind" title="Blowy m8"></i>
+							</div>
 
-        </div>
+							<div class="icon" id="sunscreen">
+								<i class="fas fa-sun" title="Probably should wear sunscreen."></i>
+							</div>
+
+							<div class="icon" id="pills" hidden>
+								<i class="fas fa-pills" title="Prepare your allergy tablets!"></i>
+							</div>
+
+							<div class="icon" id="gloves" hidden>
+								<i class="fas fa-mitten" title="It's nippy!"></i>
+							</div>
+
+							<div class="icon" id="ice" hidden>
+								<i class="fas fa-icicles" title="There be ice on the road!"></i>
+							</div>
+
+							<div class="icon" id="snow" hidden>
+								<i class="fas fa-snowflake" title="There be ice on the road!"></i>
+							</div>
+							<div class="icon" id="ice-cream" hidden>
+								<i class="fas fa-ice-cream" title="Perfect ice cream weather"></i>
+							</div>
+
+							<div class="icon" id="pollen" hidden>
+								<i class="fas fa-leaf" title="Pollen count is high!"></i>
+							</div>
+
+							<div class="icon" id="fog" hidden>
+								<i class="fas fa-smog" title="Foggy!"></i>
+							</div>s
+
+							<div class="icon" id="air-pollution" hidden>
+								<i class="fas fa-lungs" title="Air pollution is high!"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     </div>
 </div>
+<hr>
 <div class="hour-info">
 	<div class="row" id="hour-bar"></div>
 </div>

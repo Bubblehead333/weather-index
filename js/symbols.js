@@ -5,7 +5,7 @@ function calculateShowSymbols(todayData){
 		toggleSymbol("umbrella");
 	}
     //Sunglasses
-    if(todayData.temp > 15){
+    if(todayData.temp > 15 && todayData.conditions == "Clear"){
 		toggleSymbol("sunglasses");
 	}
     //Wind
