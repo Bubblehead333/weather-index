@@ -9,9 +9,11 @@
 	<script src="https://kit.fontawesome.com/2412043277.js" crossorigin="anonymous"></script>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="js/phrases.js"></script>
-	<script src="js/hour-block.js"></script>
 	<script src="js/day-block.js"></script>
+	<script src="js/hour-block.js"></script>
+	<script src="js/phrases.js"></script>
+	<script src="js/symbols.js"></script>
+
 
 	<link href="https://fonts.googleapis.com/css2?family=Baloo+2&amp;family=Gudea&amp;display=swap" rel="stylesheet">
 
@@ -21,22 +23,24 @@ function getWeatherData() {
 
     var location = "Plymouth, UK";
     var unitGroup = "uk";
-    var key = "";
+    var key = "EG9M1DKIS4M8MMPZS81PQ37WS";
 
     var uri = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/forecast?";
     uri += "unitGroup=" + unitGroup + "&locationMode=single&aggregateHours=1&includeAstronomy=true&contentType=json&iconSet=icons1&location=" + location + "&key=" + key;
     $.get(uri, function(rawResult) {
         var data = rawResult;
-        console.log(rawResult.location["values"][0]);
+        console.log(rawResult.location["values"][1]);
         var todayData = rawResult.location["values"][0];
 
 		generateDayBlock(todayData);
 		getDayPhrase(todayData);
 
-		for (var i = 0; i < 6; i++) {
-			generateHoursHTML(i);
+		for (var i = 0; i < 12; i++) {
+			generateHoursHTML(rawResult.location["values"][i], i);
 			generateHourBlock(rawResult.location["values"][i], i);
 		}
+
+		document.getElementById("location").innerHTML = location;
     });
 }
 
@@ -51,6 +55,9 @@ getWeatherData();
         <div class="col-sm-3">
             <h2><div id="date"</div></h2>
         </div>
+		<div class="col-sm-3">
+            <h2><div id="location"</div></h2>
+        </div>
         <div class="col-sm-1">
             <div id="sunrise"><i class="far fa-sun" title="Sunrise"></i> </div>
         </div>
@@ -58,33 +65,75 @@ getWeatherData();
             <div id="sunset"><i class="far fa-moon" title="Sunset"></i> </div>
         </div>
     </div>
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="current-time" id="current-time"></div>
+		</div>
+		<div class="col-sm-9">
+			<div id="recommend">
+				<!--These will be used later for warnings/recommendations-->
+				<div class="icon" id="umbrella">
+					<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
+				</div>
+				<div class="icon" id="sunglasses">
+					<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
+				</div>
+				<div class="icon" id="wind">
+					<i class="fas fa-wind" title="Blowy m8"></i>
+				</div>
+
+				<div class="icon" id="sunscreen">
+					<i class="fas fa-sun" title="Probably should wear sunscreen."></i>
+				</div>
+
+				<div class="icon" id="pills">
+					<i class="fas fa-pills" title="Prepare your allergy tablets!"></i>
+				</div>
+
+				<div class="icon" id="gloves">
+					<i class="fas fa-mitten" title="It's nippy!"></i>
+				</div>
+
+				<div class="icon" id="ice">
+					<i class="fas fa-icicles" title="There be ice on the road!"></i>
+				</div>
+
+				<div class="icon" id="snow">
+					<i class="fas fa-snowflake" title="There be ice on the road!"></i>
+				</div>
+				<div class="icon" id="ice-cream">
+					<i class="fas fa-ice-cream" title="Perfect ice cream weather"></i>
+				</div>
+
+				<div class="icon" id="pollen">
+					<i class="fas fa-leaf" title="Pollen count is high!"></i>
+				</div>
+
+				<div class="icon" id="fog">
+					<i class="fas fa-smog" title="Foggy!"></i>
+				</div>
+
+				<div class="icon" id="air-pollution">
+					<i class="fas fa-lungs" title="Air pollution is high!"></i>
+				</div>
+			</div>
+		</div>
+	</div>
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12">
             <h2 id="phrase"></h2>
         </div>
-		<div class="col-sm-12 col-md-6">
-            <div id="recommend">
-				<!--These will be used later for warnings/recommendations-->
-				<i class="fas fa-umbrella" title="You may need an umbrella!"></i>
-				<i class="fas fa-glasses" title="Don't forget your sunnies!"></i>
-				<i class="fas fa-wind" title="Blowy m8"></i>
-				<i class="fas fa-sun" title="Probably should wear sunscreen."></i>
-				<i class="fas fa-pills" title="Prepare your allergy tablets!"></i>
-				<i class="fas fa-mitten" title="It's nippy!"></i>
-				<i class="fas fa-icicles" title="There be ice on the road!"></i>
-				<i class="fas fa-snowflake" title="There be ice on the road!"></i>
-				<i class="fas fa-ice-cream" title="Perfect ice cream weather"></i>
-				<i class="fas fa-leaf" title="Pollen count is high!"></i>
-				<i class="fas fa-smog" title="Air pollution is high!"></i>
-				<i class="fas fa-lungs" title="Air pollution is high!"></i>
-			</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+
         </div>
     </div>
 </div>
 <div class="hour-info">
 	<div class="row" id="hour-bar"></div>
 </div>
-<div class="sources">
+<!-- <div class="sources">
 	<div class="row">
 		<div class="col-sm-12 sources-text">
 			<p>
@@ -96,7 +145,7 @@ getWeatherData();
 			</p>
 		</div>
 	</div>
-</div>
+</div> -->
 
 </body>
 </html>

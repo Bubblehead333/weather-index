@@ -1,6 +1,7 @@
-function generateDayBlock(todayData){
+function generateDayBlock(todayData)
+{
 	var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    var DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 	var dateTime = new Date(todayData.datetimeStr);
 
 	//Render Date
@@ -12,6 +13,12 @@ function generateDayBlock(todayData){
 	var dateBlock = document.getElementById("date");
 	dateBlock.innerHTML += dateString;
 
+
+	var today = new Date();
+	var time = today.getHours() + ":" + today.getMinutes();
+	document.getElementById("current-time").innerHTML = time;
+
+
 	//Sunrise
 	var sunriseBlock = document.getElementById("sunrise");
 	var sunriseTime = new Date(todayData.sunrise);
@@ -22,4 +29,5 @@ function generateDayBlock(todayData){
 	var sunsetTime = new Date(todayData.sunset);
 	sunsetBlock.innerHTML += sunsetTime.toLocaleTimeString('en-UK', { hour: '2-digit', minute: '2-digit', hour12: false });
 
+	calculateShowSymbols(todayData);
 }
