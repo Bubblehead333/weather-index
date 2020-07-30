@@ -13,8 +13,8 @@ function generateHoursHTML(hourData, index)
 		console.log("iover 0%");
 	}
 
-	var tempatureColour1 = "hsl(" + temperatureSize * 2 + ", 81%, 83%)";
-	var tempatureColour2 = "hsl(" + (temperatureSize + 10) * 2 + ", 81%, 83%)";
+	var tempatureColour1 = "hsl(" + Math.abs(temperatureSize - 100) * 2 + ", 81%, 83%)";
+	var tempatureColour2 = "hsl(" + (Math.abs(temperatureSize - 100)) * 2 + ", 81%, 83%)";
 
 	var hourBlock = "<div style='background-image: linear-gradient(" + tempatureColour1 + ", " + tempatureColour2 + " 100%); background-size: 100%" + temperatureSize + "%; background-repeat: no-repeat; background-position: center bottom;' class='hour-block col-sm-2 col-md-2 col-lg-1'>" +
 	"<div class='colour' id='colour-" + index + "'>" +
